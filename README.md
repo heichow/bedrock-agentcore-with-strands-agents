@@ -1,10 +1,20 @@
 # Bedrock AgentCore Workshop
 
-This workshop provides hands-on experience with Amazon Bedrock AgentCore, demonstrating how to build sophisticated AI agents using various tools and runtime environments. You'll learn to integrate code interpreters, browser automation, secure credential management, and deploy scalable agent solutions.
+This workshop provides hands-on experience with Amazon Bedrock AgentCore, demonstrating how to build sophisticated AI agents using various tools and runtime environments. You'll learn to integrate code interpreters, browser automation, secure credential management, memory capabilities, and deploy scalable agent solutions.
 
 ## Workshop Overview
 
-The workshop consists of 5 progressive labs that build upon each other:
+The workshop consists of 8 progressive labs that build upon each other:
+
+### Lab 0: Getting Started with Strands Agents
+**File:** `00-strands-agents/00-strands-agents-getting-started.ipynb`
+
+Introduction to Strands Agents framework and basic agent creation.
+
+- Learn Strands Agents fundamentals
+- Create your first AI agent
+- Use built-in tools like calculator
+- Develop custom tools and integrate them with agents
 
 ### Lab 1: Code Interpreter Integration
 **File:** `01-bedrock-agentcore-code-interpreter/01-agentcore-code-interpreter.ipynb`
@@ -26,15 +36,15 @@ Explore browser automation capabilities for web interaction and data extraction.
 - Extract information from web pages
 - Implement common browser automation use cases
 
-### Lab 3: Secure Credential Management
-**File:** `03-bedrock-agentcore-identity/03-agentcore-identity-for-secret-retrieval.ipynb`
+### Lab 3: Secure Credential Management with Exa MCP
+**File:** `03-bedrock-agentcore-identity-apikey/03-agentcore-identity-for-exa-mcp.ipynb`
 
-Implement secure credential management for external API integrations.
+Implement secure credential management for external API integrations using Exa search as an example.
 
 - Understand credential management challenges
-- Create API Key Credential Providers
+- Create API Key Credential Providers for Exa API
 - Securely store and retrieve external service credentials
-- Test secure credential access in AI agents
+- Test secure credential access with Exa MCP server
 
 ### Lab 4: MCP Server Deployment
 **File:** `04-bedrock-agentcore-runtime-mcp/04-agentcore-runtime-for-mcp-deploy.ipynb`
@@ -42,33 +52,54 @@ Implement secure credential management for external API integrations.
 Deploy Model Context Protocol (MCP) servers in Bedrock AgentCore Runtime.
 
 - Create custom MCP servers with web search functionality
-- Set up authentication using Amazon Cognito
-- Deploy MCP servers to AgentCore Runtime
-- Test deployed servers with Strands Agents
+- Set up inbound authentication using Amazon Cognito
+- Deploy MCP server to AgentCore Runtime
+- Test deployed MCP server with Strands Agents
 
-### Lab 5: Complete Agent Runtime Deployment
-**File:** `05-bedrock-agentcore-runtime-strands/05-agentcore-runtime-strands-deploy.ipynb`
+### Lab 5: Agent Runtime Deployment with Observability
+**File:** `05-bedrock-agentcore-runtime-and-observability/05-agentcore-runtime-for-strands-deploy.ipynb`
 
-Deploy comprehensive Strands Agents with integrated tools and observability.
+Deploy Strands Agents with built-in and custom tools to Bedrock AgentCore Runtime with comprehensive observability features.
 
-- Deploy agents with multiple integrated tools
-- Combine MCP servers, code interpreters, and custom functions
-- Implement observability and monitoring
-- Test end-to-end agent scenarios
+- Deploy the Strands Agents with tools to Bedrock AgentCore Runtime
+- Use `boto3` with IAM permission to invoke the deployed agent
+- Understand the nature of Bedrock AgentCore Runtime session
+- Learn about GenAI Observability and Traceability
+
+### Lab 6: Memory Integration
+**File:** `06-bedrock-agentcore-memory/06-agentcore-memory.ipynb`
+
+Integrate persistent memory capabilities with Strands Agents using Bedrock AgentCore Memory.
+
+- Understand memory concepts in AI agents
+- Implement short-term and long-term memory
+- Create memory-enabled agents for conversational continuity
+- Test memory retrieval across sessions
+
+### Lab 7: Gateway Integration with OpenAPI
+**File:** `07-bedrock-agentcore-gateway-openapi/07-agentcore-gateway-for-exa-openapi.ipynb`
+
+Use Bedrock AgentCore Gateway to automatically generate MCP servers from OpenAPI specifications.
+
+- Create Cognito inbound authentication for gateway access
+- Upload OpenAPI specifications to generate MCP server
+- Configure API key credential providers for outbound authentication
+- Test generated MCP server with Strands Agents
 
 ## Prerequisites
 
 Before starting the workshop, ensure you have:
 
-- **AWS Account** with appropriate permissions for Bedrock AgentCore
+- **AWS Account** with appropriate permissions for Bedrock AgentCore and related services
+- [Nova Pro Model Access](https://docs.aws.amazon.com/nova/latest/userguide/getting-started-console.html) request in Bedrock
+- [Enable CloudWatch Transaction Search](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability-configure.html#observability-configure-builtin) for AgentCore Observability
 - **AWS Credentials** configured (IAM role or environment variables)
-- **Python Environment** with required packages
-- **Basic Understanding** of AI agents and AWS services
-- **External API Keys** (e.g., Exa API key for Lab 3)
+- **Python Environment** with required packages (instructions in each notebook)
+- **Exa API Key** (required for Labs 3 and 7) - Get one from [Exa Dashboard](https://dashboard.exa.ai/api-keys)
 
 ### AWS Regions
 
-Bedrock AgentCore is available in specific AWS regions. Ensure you're working in a supported region.
+We suggest to use `us-east-1` for this workshop. Bedrock AgentCore is available in specific AWS regions. Ensure you're working in a supported region.
 
 ### Environment Setup
 
@@ -87,57 +118,59 @@ os.environ["AWS_REGION"] = "<AWS_REGION>"
 
 ```
 bedrock-agentcore-workshop/
+├── 00-strands-agents/
+│   └── 00-strands-agents-getting-started.ipynb
 ├── 01-bedrock-agentcore-code-interpreter/
 │   └── 01-agentcore-code-interpreter.ipynb
 ├── 02-bedrock-agentcore-browser/
 │   └── 02-agentcore-browser-use.ipynb
-├── 03-bedrock-agentcore-identity/
-│   └── 03-agentcore-identity-for-secret-retrieval.ipynb
+├── 03-bedrock-agentcore-identity-apikey/
+│   └── 03-agentcore-identity-for-exa-mcp.ipynb
 ├── 04-bedrock-agentcore-runtime-mcp/
 │   ├── 04-agentcore-runtime-for-mcp-deploy.ipynb
-│   └── images/
-├── 05-bedrock-agentcore-runtime-strands/
-│   ├── 05-agentcore-runtime-strands-deploy.ipynb
-│   └── images/
-├── code-editor.yaml
+├── 05-bedrock-agentcore-runtime-and-observability/
+│   ├── 05-agentcore-runtime-for-strands-deploy.ipynb
+├── 06-bedrock-agentcore-memory/
+│   ├── 06-agentcore-memory.ipynb
+├── 07-bedrock-agentcore-gateway-openapi/
+│   ├── 07-agentcore-gateway-for-exa-openapi.ipynb
+│   ├── exa-openapi-spec.yaml
 └── README.md
 ```
 
 ## Getting Started
 
-1. **Clone or download** this workshop repository
-2. **Set up your AWS credentials** and ensure you're in a supported region
-3. **Install required Python packages** (instructions in each notebook)
-4. **Start with Lab 1** and progress sequentially through the labs
+1. **Set up your AWS credentials** and ensure you're in a supported region
+2. Setup Python virtual environment with uv - [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
+   ```bash
+   uv venv --python 3.11
+   source .venv/bin/activate
+   ```
+3. **Install required Python packages** 
+   ```bash
+   uv pip install strands-agents strands-agents-tools bedrock-agentcore bedrock-agentcore-starter-toolkit mcp ddgs playwright rich
+   ```
+4. **Start with Lab 0** and progress sequentially through the labs
 5. **Complete each lab** before moving to the next, as later labs depend on earlier ones
-
-## Lab Dependencies
-
-- **Labs 1-3** can be completed independently
-- **Lab 4** requires completion of Lab 3 (for secure credential management)
-- **Lab 5** requires completion of Labs 3 and 4 (uses MCP servers and credentials from previous labs)
 
 ## Key Learning Outcomes
 
 By completing this workshop, you will:
 
-- Understand Bedrock AgentCore capabilities and architecture
+- Understand Strands Agents fundamentals and framework
 - Build AI agents with code execution capabilities
 - Implement browser automation for web interactions
 - Manage credentials securely for external service integrations
 - Deploy and scale MCP servers in production environments
 - Create comprehensive agent solutions with observability
+- Integrate persistent memory capabilities for conversational continuity
+- Generate MCP servers from OpenAPI specifications using Gateway
 - Apply best practices for agent development and deployment
 
 ## Support and Resources
 
-- **AWS Documentation:** [Amazon Bedrock AgentCore](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/)
-- **Strands Agents:** Learn about the agent framework used in this workshop
-- **Model Context Protocol:** Understanding MCP for tool integration
-
-## Workshop Environment
-
-This workshop is designed to run in AWS Workshop Studio with a pre-configured Code Editor environment. The `code-editor.yaml` file contains the CloudFormation template for setting up the workshop environment.
+- [Amazon Bedrock AgentCore](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/)
+- [Strands Agents](https://strandsagents.com/latest/)
 
 ---
 
