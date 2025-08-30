@@ -412,6 +412,7 @@ Resources:
                 - !Sub echo 'PATH=$PATH:/home/${CodeEditorUser}/.local/bin' >> /home/${CodeEditorUser}/.bashrc
                 - !Sub echo 'export PATH' >> /home/${CodeEditorUser}/.bashrc
                 - !Sub echo 'export AWS_REGION=${AWS::Region}' >> /home/${CodeEditorUser}/.bashrc
+                - !Sub echo 'export AWS_DEFAULT_REGION=${AWS::Region}' >> /home/${CodeEditorUser}/.bashrc
                 - !Sub echo 'export AWS_ACCOUNTID=${AWS::AccountId}' >> /home/${CodeEditorUser}/.bashrc
                 - !Sub echo 'export NEXT_TELEMETRY_DISABLED=1' >> /home/${CodeEditorUser}/.bashrc
                 - !Sub echo "export PS1='\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> /home/${CodeEditorUser}/.bashrc
@@ -1252,9 +1253,13 @@ Resources:
       ManagedPolicyArns:
         - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore
         - !Sub arn:${AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy
-        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonBedrockFullAccess
         - !Sub arn:${AWS::Partition}:iam::aws:policy/BedrockAgentCoreFullAccess
-        - !Sub arn:${AWS::Partition}:iam::aws:policy/AdministratorAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonBedrockFullAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonCognitoPowerUser
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AWSCodeBuildAdminAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonS3FullAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/IAMFullAccess
 
   CodeEditorInstanceProfile:
     Type: AWS::IAM::InstanceProfile
