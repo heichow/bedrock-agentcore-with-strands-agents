@@ -14,3 +14,5 @@
 04-bedrock-agentcore-runtime-mcp/requirements.txt
 05-bedrock-agentcore-runtime-strands/strands_agent.py
 05-bedrock-agentcore-runtime-strands/requirements.txt
+
+code-editor.yaml
