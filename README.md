@@ -134,24 +134,21 @@ bedrock-agentcore-workshop/
 │   ├── 06-agentcore-memory.ipynb
 ├── 07-bedrock-agentcore-gateway-openapi/
 │   ├── 07-agentcore-gateway-for-exa-openapi.ipynb
-│   ├── exa-openapi-spec.yaml
+│   └── exa-openapi-spec.yaml
+├── pyproject.toml
+├── uv.lock
 └── README.md
 ```
 
 ## Getting Started
 
 1. **Set up your AWS credentials** and ensure you're in a supported region
-2. Setup Python virtual environment with uv - [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
+2. Setup workshop environment with **uv** - [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
    ```bash
-   uv venv --python 3.11
-   source .venv/bin/activate
+   uv sync
    ```
-3. **Install required Python packages** 
-   ```bash
-   uv pip install strands-agents strands-agents-tools bedrock-agentcore bedrock-agentcore-starter-toolkit mcp ddgs playwright rich
-   ```
-4. **Start with Lab 0** and progress sequentially through the labs
-5. **Complete each lab** before moving to the next, as later labs depend on earlier ones
+3. **Start with Lab 0** and progress sequentially through the labs
+4. **Complete each lab** to clean up AWS resources 
 
 ## Key Learning Outcomes
 
